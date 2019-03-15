@@ -36,13 +36,13 @@
 </template>
 
 <script>
-//  import popupMixin from 'common/mixins/popup'
+  import popupMixin from 'common/mixins/popup'
   import Star from 'components/star/star'
   import SupportIco from 'components/support-ico/support-ico'
 
   export default {
     name: 'header-detail',
-//    mixins: [popupMixin],
+    mixins: [popupMixin],
     props: {
       seller: {
         type: Object,

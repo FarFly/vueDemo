@@ -8,7 +8,7 @@
 </template>
 
 <script>
-//  import qs from 'query-string'
+  import qs from 'query-string'
   import { getSeller } from 'api'
   import VHeader from 'components/v-header/v-header'
   import Goods from 'components/goods/goods'
@@ -20,7 +20,7 @@
     data() {
       return {
         seller: {
-//          id: qs.parse(location.search).id
+          id: qs.parse(location.search).id
         }
       }
     },

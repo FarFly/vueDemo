@@ -77,7 +77,7 @@
   import Split from 'components/split/split'
   import ratingMixin from 'common/mixins/rating'
   import { getRatings } from 'api'
-//  import moment from 'moment'
+  import moment from 'moment'
 
   export default {
     name: 'ratings',
@@ -111,10 +111,10 @@
             this.ratings = ratings
           })
         }
+      },
+      format (time) {
+        return moment(time).format('YYYY-MM-DD hh:mm')
       }
-//      format (time) {
-//        return moment(time).format('YYYY-MM-DD hh:mm')
-//      }
     },
     components: {
       Star,

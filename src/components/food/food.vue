@@ -73,7 +73,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-//  import moment from 'moment'
+  import moment from 'moment'
   import CartControl from 'components/cart-control/cart-control'
   import RatingSelect from 'components/rating-select/rating-select'
   import Split from 'components/split/split'
@@ -124,9 +124,9 @@
       addFood(target) {
         this.$emit(EVENT_ADD, target)
       },
-//      format(time) {
-//        return moment(time).format('YYYY-MM-DD hh:mm')
-//      }
+      format(time) {
+        return moment(time).format('YYYY-MM-DD hh:mm')
+      }
     },
     components: {
       CartControl,
