@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
-          <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
+          <!--<div class="desc">另需配送费￥{{deliveryPrice}}元</div>-->
         </div>
         <div class="content-right" @click="pay">
           <div class="pay" :class="payClass">
@@ -38,7 +38,7 @@
 
 <script>
   import Bubble from 'components/bubble/bubble'
-
+  import axios from 'axios'
   const BALL_LEN = 10
   const innerClsHook = 'inner-hook'
 
@@ -102,10 +102,10 @@
       },
       payDesc() {
         if (this.totalPrice === 0) {
-          return `￥${this.minPrice}元起送`
+          return `￥${this.minPrice}元消费起`
         } else if (this.totalPrice < this.minPrice) {
           let diff = this.minPrice - this.totalPrice
-          return `还差￥${diff}元起送`
+          return `还差￥${diff}元`
         } else {
           return '去结算'
         }
@@ -137,8 +137,68 @@
           return
         }
         this.$createDialog({
+          type: 'confirm',
           title: '支付',
-          content: `您需要支付${this.totalPrice}元`
+          content: `您需要支付${this.totalPrice}元`,
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false
+          },
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false
+          },
+          onConfirm: () => {
+            const goods = this.selectFoods.map(good => {
+              return { productId: good.id, productQuantity: good.count }
+            })
+            const ERR_OK = 0
+            axios.post('http://localhost:8888/sell/order/create', {
+              'phone': 131,
+              'name': '呵呵呵',
+              'address': 'where',
+//              'items': JSON.stringify(goods)
+              'items': goods
+            }).then((res) => {
+              res = res.data
+              if (res.errno === ERR_OK) {
+                this.$createToast({
+                  type: 'warn',
+                  time: 1500,
+                  txt: '支付成功'
+                }).show()
+                this.selectFoods.forEach((food) => {
+                  food.count = 0
+                })
+              } else {
+//                this.$createToast({
+//                  type: 'warn',
+//                  time: 3000,
+//                  txt: res.msg
+//                }).show()
+                this.$createDialog({
+                  type: 'alert',
+                  title: '商品库存不足',
+                  content: res.msg
+                }).show()
+              }
+            }).catch((e) => {
+              this.$createToast({
+                type: 'warn',
+                time: 1500,
+                txt: '支付失败'
+              }).show()
+            })
+          },
+          onCancel: () => {
+            this.$createToast({
+              type: 'warn',
+              time: 3000,
+              txt: '已取消支付'
+            }).show()
+          }
         }).show()
         e.stopPropagation()
       },

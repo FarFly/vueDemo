@@ -54,9 +54,10 @@
       "type": -1,
       "foods": [
         {
+          "id": 1,
           "name": "皮蛋瘦肉粥",
           "price": 10,
-          "oldPrice": "",
+          "oldPrice": 15,
           "description": "咸粥",
           "sellCount": 229,
           "rating": 100,
@@ -88,6 +89,7 @@
           "image": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750"
         },
         {
+          "id": 2,
           "name": "扁豆焖面",
           "price": 14,
           "oldPrice": "",
