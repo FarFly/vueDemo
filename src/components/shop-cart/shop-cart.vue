@@ -155,7 +155,7 @@
               return { productId: good.id, productQuantity: good.count }
             })
             const ERR_OK = 0
-            axios.post('http://localhost:8888/sell/order/create', {
+            axios.post('http://120.79.62.44:8888/sell/order/create', {
               'phone': 131,
               'name': '呵呵呵',
               'address': 'where',
