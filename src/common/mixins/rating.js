@@ -10,14 +10,16 @@ export default {
   computed: {
     computedRatings() {
       let ret = []
-      this.ratings.forEach((rating) => {
-        if (this.onlyContent && !rating.text) {
-          return
-        }
-        if (this.selectType === ALL || rating.rateType === this.selectType) {
-          ret.push(rating)
-        }
-      })
+      if (this.ratings) {
+        this.ratings.forEach((rating) => {
+          if (this.onlyContent && !rating.text) {
+            return
+          }
+          if (this.selectType === ALL || rating.rateType === this.selectType) {
+            ret.push(rating)
+          }
+        })
+      }
       return ret
     }
   },
